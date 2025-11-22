@@ -1,5 +1,5 @@
 {
   "name": "Lumina Portfolio",
-  "description": "A high-performance, minimalistic 3D portfolio featuring a Gemini-powered AI assistant and interactive WebGL visuals.",
+  "description": "A high-performance, minimalistic 3D portfolio featuring interactive WebGL visuals.",
   "requestFramePermissions": []
 }

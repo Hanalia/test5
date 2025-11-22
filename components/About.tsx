@@ -2,13 +2,15 @@ import React from 'react';
 import { SKILLS, ABOUT_TEXT } from '../constants';
 import { motion } from 'framer-motion';
 
+const MotionDiv = motion.div as any;
+
 const About: React.FC = () => {
   return (
     <section id="about" className="py-32 px-6 bg-neutral-900/30 backdrop-blur-sm">
       <div className="container mx-auto max-w-5xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Text Content */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -23,10 +25,10 @@ const About: React.FC = () => {
                 Whether I'm optimizing a backend query or tweaking a shader, I strive for excellence.
               </p>
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Skills Visualization */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -41,7 +43,7 @@ const About: React.FC = () => {
                     <span className="font-mono text-xs text-gray-500">{skill.level}%</span>
                   </div>
                   <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
-                    <motion.div
+                    <MotionDiv
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
@@ -52,7 +54,7 @@ const About: React.FC = () => {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

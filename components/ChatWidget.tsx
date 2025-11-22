@@ -1,13 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot, Sparkles } from 'lucide-react';
+import { MessageSquare, X, Send, Bot } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChatMessage } from '../types';
-import { sendMessageToGemini } from '../services/geminiService';
+import { CONTACT_EMAIL } from '../constants';
+
+const MotionDiv = motion.div as any;
+const MotionButton = motion.button as any;
 
 const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "Hi! I'm Lumina AI. Ask me anything about this portfolio, my skills, or my experience.", timestamp: Date.now() }
+    { role: 'model', text: "Hi! I'm Lumina's virtual assistant. I'm currently in static mode, but feel free to leave a message!", timestamp: Date.now() }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -29,14 +32,16 @@ const ChatWidget: React.FC = () => {
     setInputValue('');
     setIsLoading(true);
 
-    // Format history for the API
-    const history = messages.map(m => ({ role: m.role, text: m.text }));
-    
-    const responseText = await sendMessageToGemini(userMsg.text, history);
-    
-    const botMsg: ChatMessage = { role: 'model', text: responseText, timestamp: Date.now() };
-    setMessages(prev => [...prev, botMsg]);
-    setIsLoading(false);
+    // Simulate network delay for a "bot" feel without actual AI
+    setTimeout(() => {
+        const botMsg: ChatMessage = { 
+            role: 'model', 
+            text: `Thanks for your message! Since I'm just a demo interface right now, please email ${CONTACT_EMAIL} for real inquiries.`, 
+            timestamp: Date.now() 
+        };
+        setMessages(prev => [...prev, botMsg]);
+        setIsLoading(false);
+    }, 1000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -47,7 +52,7 @@ const ChatWidget: React.FC = () => {
     <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -57,7 +62,7 @@ const ChatWidget: React.FC = () => {
             <div className="p-4 bg-indigo-600/20 border-b border-indigo-500/20 flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <Bot className="w-5 h-5 text-indigo-400" />
-                <span className="font-bold text-sm text-white">Lumina AI Assistant</span>
+                <span className="font-bold text-sm text-white">Lumina Assistant</span>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
@@ -105,7 +110,7 @@ const ChatWidget: React.FC = () => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleKeyPress}
-                  placeholder="Ask about my skills..."
+                  placeholder="Type a message..."
                   className="w-full bg-neutral-800 text-white text-sm rounded-xl pl-4 pr-12 py-3 focus:outline-none focus:ring-1 focus:ring-indigo-500 border border-white/5"
                 />
                 <button
@@ -116,15 +121,12 @@ const ChatWidget: React.FC = () => {
                   <Send className="w-4 h-4" />
                 </button>
               </div>
-              <div className="mt-2 text-[10px] text-center text-gray-600">
-                Powered by Gemini 2.5 Flash
-              </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </AnimatePresence>
 
-      <motion.button
+      <MotionButton
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
@@ -137,7 +139,7 @@ const ChatWidget: React.FC = () => {
             <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
           </span>
         )}
-      </motion.button>
+      </MotionButton>
     </div>
   );
 };

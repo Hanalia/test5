@@ -3,11 +3,13 @@ import { PROJECTS } from '../constants';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 
+const MotionDiv = motion.div as any;
+
 const Projects: React.FC = () => {
   return (
     <section id="work" className="py-32 px-6 relative">
       <div className="container mx-auto max-w-6xl">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -16,11 +18,11 @@ const Projects: React.FC = () => {
         >
           <h2 className="text-4xl font-bold mb-4">Selected Work</h2>
           <div className="h-1 w-20 bg-indigo-500" />
-        </motion.div>
+        </MotionDiv>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {PROJECTS.map((project, index) => (
-            <motion.div
+            <MotionDiv
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +62,7 @@ const Projects: React.FC = () => {
               </div>
               
               <a href={project.link} className="absolute inset-0 z-20" aria-label={`View ${project.title}`} />
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>

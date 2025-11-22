@@ -3,11 +3,13 @@ import { CONTACT_EMAIL } from '../constants';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, Twitter } from 'lucide-react';
 
+const MotionDiv = motion.div as any;
+
 const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-32 px-6 relative overflow-hidden">
       <div className="container mx-auto max-w-4xl text-center z-10 relative">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -45,7 +47,7 @@ const Contact: React.FC = () => {
           <div className="mt-32 text-sm text-gray-600">
             &copy; {new Date().getFullYear()} Lumina Portfolio. Built with React, Three.js & Gemini.
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

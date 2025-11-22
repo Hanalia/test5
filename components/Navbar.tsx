@@ -3,6 +3,8 @@ import { NAV_LINKS } from '../constants';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const MotionDiv = motion.div as any;
+
 const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +52,7 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
@@ -66,7 +68,7 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </a>
               ))}
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
       </div>
