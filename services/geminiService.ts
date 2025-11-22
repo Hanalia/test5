@@ -3,9 +3,7 @@ import { PROJECTS, SKILLS, ABOUT_TEXT } from "../constants";
 
 // Initialize the Gemini API client
 // Using process.env.API_KEY as per requirements
-const apiKey = process.env.API_KEY || ''; 
-// We handle the empty key case gracefully in the UI, but here we instantiate safely.
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const SYSTEM_INSTRUCTION = `
 You are "Lumina AI", a helpful virtual assistant for a creative developer's portfolio website.
@@ -23,7 +21,7 @@ If asked about the tech stack of this site, mention React, TypeScript, Tailwind,
 `;
 
 export const sendMessageToGemini = async (message: string, history: { role: 'user' | 'model'; text: string }[]): Promise<string> => {
-  if (!apiKey) {
+  if (!process.env.API_KEY) {
     return "I'm currently in demo mode without an API key. Please configure the API_KEY environment variable to chat with me!";
   }
 

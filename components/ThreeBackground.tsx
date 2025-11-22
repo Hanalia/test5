@@ -5,12 +5,13 @@ import * as THREE from 'three';
 
 // Add type definitions for Three.js elements to JSX.IntrinsicElements
 // to satisfy TypeScript compiler in environments where they aren't automatically picked up.
-declare global {
+declare module 'react' {
   namespace JSX {
     interface IntrinsicElements {
       ambientLight: any;
       directionalLight: any;
       pointLight: any;
+      // Add other elements if needed
     }
   }
 }
@@ -53,7 +54,7 @@ const ThreeBackground: React.FC = () => {
       <Canvas camera={{ position: [0, 0, 5] }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} color="cyan" />
+        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#06b6d4" />
         
         <AnimatedSphere />
         
